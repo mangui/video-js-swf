@@ -59,7 +59,6 @@ package com.videojs.providers{
           _hls.addEventListener(HLSEvent.MANIFEST_LOADED,_manifestHandler);
           _hls.addEventListener(HLSEvent.MEDIA_TIME,_mediaTimeHandler);
           _hls.addEventListener(HLSEvent.PLAYBACK_STATE,_stateHandler);
-          _hls.addEventListener(HLSEvent.LEVEL_SWITCH,_levelSwitchHandler);
         }
 
         private function _completeHandler(event:HLSEvent):void {
@@ -156,14 +155,6 @@ package com.videojs.providers{
                 break;
           }
         };
-
-        private function _levelSwitchHandler(event:HLSEvent):void {
-            var levelIndex:Number = event.level;
-            var bitrate:Number = _hls.levels[levelIndex].bitrate;
-            var width:Number = _hls.levels[levelIndex].width;
-            var height:Number = _hls.levels[levelIndex].height;
-            Log.info("HLSProvider: new level index " + levelIndex + " bitrate=" + bitrate + ", width=" + width + ", height=" + height);
-        }
 
         private function _onFrame(event:Event):void
         {
