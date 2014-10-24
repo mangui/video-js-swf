@@ -162,7 +162,7 @@ package com.videojs.providers{
             var width:Number = _hls.levels[levelIndex].width;
             var height:Number = _hls.levels[levelIndex].height;
             Log.info("HLSProvider: new level index " + levelIndex + " bitrate=" + bitrate + ", width=" + width + ", height=" + height);
-            _model.broadcastEventExternally(ExternalEventName.ON_LEVEL_SWITCH);
+            _model.broadcastEventExternally(ExternalEventName.ON_LEVEL_SWITCH, {levelIndex: levelIndex, bitrate: bitrate, width: width, height: height});
         }
 
         private function _onFrame(event:Event):void
