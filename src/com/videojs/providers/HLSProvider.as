@@ -543,6 +543,9 @@ package com.videojs.providers{
          */
         public function get level():int
         {
+			if(_hls.manualLevel == -1){
+				return _hls.loadLevel;
+			}
 			return _hls.manualLevel;
         }
 
