@@ -543,7 +543,7 @@ package com.videojs.providers{
          */
         public function get level():int
         {
-            return _hls.currentLevel;
+			return _hls.manualLevel;
         }
 
         /**
