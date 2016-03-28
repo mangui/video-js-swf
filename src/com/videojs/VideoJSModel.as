@@ -281,15 +281,6 @@ package com.videojs{
             }
         }
 
-
-        public function get poster():String{
-            return _poster;
-        }
-        public function set poster(pValue:String):void {
-            _poster = pValue;
-            broadcastEvent(new VideoJSEvent(VideoJSEvent.POSTER_SET));
-        }
-
         public function get parameters():Object{
             return _parameters;
         }
@@ -366,11 +357,11 @@ package com.videojs{
             _loop = pValue;
         }
 
-        public function get buffered():Number{
+        public function get buffered():Array{
             if(_provider){
                 return _provider.buffered;
             }
-            return 0;
+            return [];
         }
 
         /**

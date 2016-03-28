@@ -48,6 +48,7 @@ package com.videojs.providers{
         private var _bytesLoaded:Number = 0;
         private var _bytesTotal:Number = 0;
         private var _bufferedTime:Number = 0;
+        private var _backBufferedTime:Number = 0;
 
         public function HLSProvider() {
           Log.info("https://github.com/mangui/flashls/releases/tag/v0.4.1.1");
@@ -105,7 +106,8 @@ package com.videojs.providers{
         private function _mediaTimeHandler(event:HLSEvent):void {
           _position = event.mediatime.position;
           _bufferedTime = event.mediatime.buffer+event.mediatime.position;
-
+          _backBufferedTime = event.mediatime.position - event.mediatime.backbuffer;
+          
           if(event.mediatime.duration != _duration) {
             _duration = event.mediatime.duration;
             _model.broadcastEventExternally(ExternalEventName.ON_DURATION_CHANGE, _duration);
@@ -254,13 +256,16 @@ package com.videojs.providers{
         public function get networkState():int {
           return _networkState;
         }
-
-        /**
-         * Should return the amount of media that has been buffered, in seconds, or 0 if
-         * this value is unknown or unable to be determined (due to lack of duration data, etc)
+        
+       /**
+         * Should return an array of normalized time ranges currently
+         * buffered of the media, in seconds.
          */
-        public function get buffered():Number {
-          return _bufferedTime;
+        public function get buffered():Array{
+            if(_bufferedTime) {
+                return [[ _backBufferedTime, _bufferedTime]];
+            }
+            return [];
         }
 
         /**
