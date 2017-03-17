@@ -227,7 +227,7 @@ package com.videojs.providers{
           if(_hls.type == HLSTypes.VOD) {
             return _duration;
           } else {
-            return -1;
+            return Number.POSITIVE_INFINITY;
           }
         }
 
